@@ -5,7 +5,7 @@ const errorElement = document.querySelector('.error-message');
 const loadingElement = document.querySelector('.loading');
 const clucksElement = document.querySelector('.clucks');
 const loadMoreElement = document.querySelector('#loadMore');
-const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5500/v2/clucks' : 'https://clutter-twitter-clone.herokuapp.com/clucks';
+const API_URL = 'http://localhost:5500/clucks';
 
 let skip = 0;
 let limit = 5;
