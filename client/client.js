@@ -3,9 +3,9 @@ console.log('Ohayo Sekai!');
 const form = document.querySelector('form'); // grabbing an element on the page
 const errorElement = document.querySelector('.error-message');
 const loadingElement = document.querySelector('.loading');
-const newsElement = document.querySelector('.news');
+const CluckElement = document.querySelector('.cluck');
 const loadMoreElement = document.querySelector('#loadMore');
-const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5500/news ' : 'https://clutter-twitter-clone.herokuapp.com/news';
+const API_URL = "https://localhost:5500"; //(window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5500/Cluck ' : 'https://clutter-twitter-clone.herokuapp.com/Cluck';
 
 let skip = 0;
 let limit = 5;
@@ -21,7 +21,7 @@ document.addEventListener('scroll', () => {
   }
 });
 
-listAllNews();
+listAllCluck();
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -34,14 +34,14 @@ form.addEventListener('submit', (event) => {
     form.style.display = 'none';
     loadingElement.style.display = '';
 
-    const nnew = {
+    const cluck = {
       name,
       content
     };
     
     fetch(API_URL, {
       method: 'POST',
-      body: JSON.stringify(nnew),
+      body: JSON.stringify(cluck),
       headers: {
         'content-type': 'application/json'
       }
@@ -59,7 +59,7 @@ form.addEventListener('submit', (event) => {
       setTimeout(() => {``
         form.style.display = '';
       }, 30000);
-      listAllNews();
+      listAllCluck();
     }).catch(errorMessage => {
       form.style.display = '';
       errorElement.textContent = errorMessage;
@@ -74,36 +74,36 @@ form.addEventListener('submit', (event) => {
 
 function loadMore() {
   skip += limit;
-  listAllNews(false);
+  listAllCluck(false);
 }
 
-function listAllNews(reset = true) {
+function listAllCluck(reset = true) {
   loading = true;
   if (reset) {
-    newsElement.innerHTML = '';
+    CluckElement.innerHTML = '';
     skip = 0;
     finished = false;
   }
   fetch(`${API_URL}?skip=${skip}&limit=${limit}`)
     .then(response => response.json())
     .then(result => {
-      result.news.forEach(nnew => {
+      result.Cluck.forEach(cluck => {
         const div = document.createElement('div');
 
         const header = document.createElement('h3');
-        header.textContent = nnew.name;
+        header.textContent = cluck.name;
 
         const contents = document.createElement('p');
-        contents.textContent = nnew.content;
+        contents.textContent = cluck.content;
 
         const date = document.createElement('small');
-        date.textContent = new Date(nnew.created);
+        date.textContent = new Date(cluck.created);
 
         div.appendChild(header);
         div.appendChild(contents);
         div.appendChild(date);
 
-        newsElement.appendChild(div);
+        cluckElement.appendChild(div);
       });
       loadingElement.style.display = 'none';
       if (!result.meta.has_more) {
