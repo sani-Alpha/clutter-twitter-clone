@@ -1,9 +1,9 @@
 # clutter-twitter-clone
 
  Twitter Clone
- ## Prerequisites
- # NodeJS
- # NPM 
+ # Prerequisites
+ ### NodeJS
+ ### NPM 
  
 --> Clone or download the repo
 --> Go inside the repo and do "npm i"
