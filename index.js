@@ -3,11 +3,12 @@ const cors = require('cors');
 const monk = require('monk');
 const Filter = require('bad-words');
 const rateLimit = require('express-rate-limit');
+const cred = require(now.json);
 
 const app = express();
 app.use(express.static('client'));
 
-const db = monk(process.env.MONGO_URI || 'localhost/clutter-twiiter-clone');
+const db = monk(cred.env.MONGO_URI);
 const clucks = db.get('clucks');
 const filter = new Filter();
 
