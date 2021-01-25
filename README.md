@@ -1,7 +1,8 @@
-# clutter-twitter-clone
+# Clutter Twitter
 
- Twitter Clone
- # Prerequisites
+## A Twitter Clone
+ 
+## Prerequisites
  ### NodeJS
  ### NPM 
  
