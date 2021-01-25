@@ -1,6 +1,6 @@
 # Clutter Twitter
 
-## A Twitter Clone
+#### A Twitter Clone
  
 ## Prerequisites
  ### NodeJS
