@@ -5,6 +5,7 @@ const Filter = require('bad-words');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
+app.use(express.static('client'));
 
 const db = monk(process.env.MONGO_URI || 'localhost/clutter-twiiter-clone');
 const clucks = db.get('clucks');
