@@ -5,7 +5,7 @@ const errorElement = document.querySelector('.error-message');
 const loadingElement = document.querySelector('.loading');
 const newsElement = document.querySelector('.news');
 const loadMoreElement = document.querySelector('#loadMore');
-//const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5000/v2/news' : 'https://meower-api.now.sh/v2/mews';
+const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5500/news ' : 'https://clutter-twitter-clone.herokuapp.com/news';
 
 let skip = 0;
 let limit = 5;
@@ -56,7 +56,7 @@ form.addEventListener('submit', (event) => {
       }
     }).then(() => {
       form.reset();
-      setTimeout(() => {
+      setTimeout(() => {``
         form.style.display = '';
       }, 30000);
       listAllNews();
@@ -103,7 +103,7 @@ function listAllNews(reset = true) {
         div.appendChild(contents);
         div.appendChild(date);
 
-        mewsElement.appendChild(div);
+        newsElement.appendChild(div);
       });
       loadingElement.style.display = 'none';
       if (!result.meta.has_more) {
