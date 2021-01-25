@@ -3,9 +3,9 @@ console.log('Ohayo Sekai!');
 const form = document.querySelector('form'); // grabbing an element on the page
 const errorElement = document.querySelector('.error-message');
 const loadingElement = document.querySelector('.loading');
-const CluckElement = document.querySelector('.cluck');
+const clucksElement = document.querySelector('.clucks');
 const loadMoreElement = document.querySelector('#loadMore');
-const API_URL = "https://localhost:5500"; //(window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5500/Cluck ' : 'https://clutter-twitter-clone.herokuapp.com/Cluck';
+const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5500/v2/clucks' : 'https://clutter-twitter-clone.herokuapp.com/clucks';
 
 let skip = 0;
 let limit = 5;
@@ -21,7 +21,7 @@ document.addEventListener('scroll', () => {
   }
 });
 
-listAllCluck();
+listAllClucks();
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -56,10 +56,10 @@ form.addEventListener('submit', (event) => {
       }
     }).then(() => {
       form.reset();
-      setTimeout(() => {``
+      setTimeout(() => {
         form.style.display = '';
       }, 30000);
-      listAllCluck();
+      listAllClucks();
     }).catch(errorMessage => {
       form.style.display = '';
       errorElement.textContent = errorMessage;
@@ -74,20 +74,20 @@ form.addEventListener('submit', (event) => {
 
 function loadMore() {
   skip += limit;
-  listAllCluck(false);
+  listAllClucks(false);
 }
 
-function listAllCluck(reset = true) {
+function listAllClucks(reset = true) {
   loading = true;
   if (reset) {
-    CluckElement.innerHTML = '';
+    clucksElement.innerHTML = '';
     skip = 0;
     finished = false;
   }
   fetch(`${API_URL}?skip=${skip}&limit=${limit}`)
     .then(response => response.json())
     .then(result => {
-      result.Cluck.forEach(cluck => {
+      result.clucks.forEach(cluck => {
         const div = document.createElement('div');
 
         const header = document.createElement('h3');
@@ -103,7 +103,7 @@ function listAllCluck(reset = true) {
         div.appendChild(contents);
         div.appendChild(date);
 
-        cluckElement.appendChild(div);
+        clucksElement.appendChild(div);
       });
       loadingElement.style.display = 'none';
       if (!result.meta.has_more) {
