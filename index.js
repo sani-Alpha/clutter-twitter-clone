@@ -3,12 +3,11 @@ const cors = require('cors');
 const monk = require('monk');
 const Filter = require('bad-words');
 const rateLimit = require('express-rate-limit');
-const cred = require('./now.json');
 
 const app = express();
 app.use(express.static('client'));
 
-const db = monk(cred.env.MONGO_URI);
+const db = monk(process.env.MONGO_URI || 'localhost/clutter');
 const clucks = db.get('clucks');
 const filter = new Filter();
 
@@ -108,5 +107,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(5500, () => {
-    console.log('listening on http://localhost:5500/');
+  console.log('Listening on http://localhost:5500');
 });
